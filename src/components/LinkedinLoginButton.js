@@ -28,7 +28,6 @@ class LinkedinLoginButton extends React.PureComponent {
       onError,
     } = this.props
     this.timer = setInterval(() => {
-      console.log('qsfsdf ')
       try {
         if (!this.popup) {
           clearInterval(this.timer)
