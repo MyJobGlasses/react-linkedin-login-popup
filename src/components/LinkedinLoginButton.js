@@ -15,12 +15,20 @@ class LinkedinLoginButton extends React.PureComponent {
     this.stateKey = Math.random().toString(36).substring(7)
   }
 
+  componentWillUnmount() {
+    try {
+      this.popup.close()
+      clearInterval(this.timer)
+    } catch (e) {}
+  }
+
   _startWatchingCode() {
     const {
       onSuccess,
       onError,
     } = this.props
     this.timer = setInterval(() => {
+      console.log('qsfsdf ')
       try {
         if (!this.popup) {
           clearInterval(this.timer)
@@ -32,7 +40,6 @@ class LinkedinLoginButton extends React.PureComponent {
         }
         if (this.popup.location && this.popup.location.search) {
           const search = this.popup.location.search
-          console.log(search)
 
           if (search.indexOf('code') !== -1) {
             clearInterval(this.timer)
