@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import querystring from 'querystring'
 
+import LinkedinLogo from '../linkedin_logo.png'
+import styles from './LinkedinLoginButton.css'
+
 /**
  * Documentation for linkedin authorization flow
  * @url https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin/consumer/context
@@ -85,10 +88,22 @@ class LinkedinLoginButton extends React.PureComponent {
   }
 
   render() {
+    const {
+      children,
+    } = this.props
+    if (typeof children === 'function') {
+      return children(this._openPopup)
+    }
     return (
       <button
         onClick={this._openPopup}
+        className={styles.linkedinButton}
       >
+        <img
+          src={LinkedinLogo}
+          alt='Linkedin logo'
+          className={styles.linkedinLogo}
+        />
         Signin with Linkedin
       </button>
     )
@@ -100,6 +115,9 @@ LinkedinLoginButton.propTypes = {
   redirectUrl: PropTypes.string.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onError: PropTypes.func,
+  children: PropTypes.oneOfType([
+    PropTypes.func,
+  ]),
 }
 
 export default LinkedinLoginButton
