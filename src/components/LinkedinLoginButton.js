@@ -18,6 +18,10 @@ class LinkedinLoginButton extends React.PureComponent {
     this.stateKey = Math.random().toString(36).substring(7)
   }
 
+  /**
+   * Automatically close the popup and clear monitor timer
+   * to prevent bad behaviors and optimize code execution
+   */
   componentWillUnmount() {
     try {
       this.popup.close()
@@ -25,6 +29,10 @@ class LinkedinLoginButton extends React.PureComponent {
     } catch (e) {}
   }
 
+  /**
+   * Monitor popup to retrieve linkedin signin code
+   * We need to catch croos-origin error (from different browsers) to prevent errors to be fired
+   */
   _startWatchingCode() {
     const {
       onSuccess,
@@ -74,6 +82,10 @@ class LinkedinLoginButton extends React.PureComponent {
     }, 200)
   }
 
+  /**
+   * Method to open linkedin popup
+   * Require valide clientId/redirectUrl
+   */
   _openPopup() {
     const {
       clientId,
@@ -82,6 +94,9 @@ class LinkedinLoginButton extends React.PureComponent {
     } = this.props
     if (typeof preventFromOpenPopup === 'function' && preventFromOpenPopup()) {
       return
+    }
+    if (!clientId || !redirectUrl) {
+      throw new Error('You must provide a client ID and a redirectUrl !')
     }
     this.popup = window.open(
       `https://www.linkedin.com/oauth/v2/authorization?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${this.stateKey}`,
