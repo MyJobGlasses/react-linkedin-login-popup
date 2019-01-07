@@ -78,7 +78,11 @@ class LinkedinLoginButton extends React.PureComponent {
     const {
       clientId,
       redirectUrl,
+      preventFromOpenPopup,
     } = this.props
+    if (typeof preventFromOpenPopup === 'function' && preventFromOpenPopup()) {
+      return
+    }
     this.popup = window.open(
       `https://www.linkedin.com/oauth/v2/authorization?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${this.stateKey}`,
       'Login with linkedin',
@@ -118,6 +122,7 @@ LinkedinLoginButton.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.func,
   ]),
+  preventFromOpenPopup: PropTypes.func,
 }
 
 export default LinkedinLoginButton
