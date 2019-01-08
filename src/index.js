@@ -1,3 +1,4 @@
-import LinkedinLoginButton from './components/LinkedinLoginButton'
+import LinkedinLoginButton, { errors } from './components/LinkedinLoginButton'
 
 export default LinkedinLoginButton
+export { errors }

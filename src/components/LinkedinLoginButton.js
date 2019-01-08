@@ -5,6 +5,11 @@ import querystring from 'querystring'
 import LinkedinLogo from '../linkedin_logo.png'
 import styles from './LinkedinLoginButton.css'
 
+export const errors = {
+  POPUP_CLOSED: 'popup closed',
+  UNKNOWN: 'unknown',
+}
+
 /**
  * Documentation for linkedin authorization flow
  * @url https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin/consumer/context
@@ -44,7 +49,7 @@ class LinkedinLoginButton extends React.PureComponent {
           clearInterval(this.timer)
         }
         if (this.popup.closed) {
-          onError('popup closed')
+          onError(errors.POPUP_CLOSED)
           clearInterval(this.timer)
           return
         }
@@ -76,7 +81,7 @@ class LinkedinLoginButton extends React.PureComponent {
           return
         }
         if (typeof onError === 'function') {
-          onError('unknow error', e)
+          onError(errors.UNKNOWN, e)
         }
       }
     }, 200)
