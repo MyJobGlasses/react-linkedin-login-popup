@@ -89,7 +89,7 @@ class LinkedinLoginButton extends React.PureComponent {
 
   /**
    * Method to open linkedin popup
-   * Require valide clientId/redirectUrl
+   * Requires valide clientId/redirectUrl
    */
   _openPopup() {
     const {
@@ -106,7 +106,7 @@ class LinkedinLoginButton extends React.PureComponent {
     }
     this.popup = window.open(
       `https://www.linkedin.com/oauth/v2/authorization?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${this.stateKey}`,
-      'Login with linkedin',
+      popupConfig.title || 'Login with linkedin',
       `height=${popupConfig.height || 600},width=${popupConfig.width || 500}`,
     )
     this._startWatchingCode()
@@ -154,6 +154,7 @@ LinkedinLoginButton.defaultProps = {
   popupConfig: {
     width: 500,
     height: 600,
+    title: 'Login with linkedin',
   },
 }
 
