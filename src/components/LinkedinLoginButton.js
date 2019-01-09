@@ -95,10 +95,10 @@ class LinkedinLoginButton extends React.PureComponent {
     const {
       clientId,
       redirectUrl,
-      preventFromOpenPopup,
+      preventFromOpeningPopup,
       popupConfig,
     } = this.props
-    if (typeof preventFromOpenPopup === 'function' && preventFromOpenPopup()) {
+    if (typeof preventFromOpeningPopup === 'function' && preventFromOpeningPopup()) {
       return
     }
     if (!clientId || !redirectUrl) {
@@ -143,7 +143,7 @@ LinkedinLoginButton.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.func,
   ]),
-  preventFromOpenPopup: PropTypes.func,
+  preventFromOpeningPopup: PropTypes.func,
   popupConfig: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
