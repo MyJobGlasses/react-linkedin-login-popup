@@ -89,7 +89,7 @@ class LinkedinLoginButton extends React.PureComponent {
 
   /**
    * Method to open linkedin popup
-   * Requires valide clientId/redirectUrl
+   * Requires valid clientId/redirectUrl
    */
   _openPopup() {
     const {
