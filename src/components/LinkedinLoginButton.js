@@ -105,6 +105,9 @@ class LinkedinLoginButton extends React.PureComponent {
     if (!clientId || !redirectUrl) {
       throw new Error('You must provide a client ID and a redirectUrl !')
     }
+    if (!Array.isArray(scopes)) {
+      throw new Error('You must provide an array on scope props')
+    }
     this.popup = window.open(
       `https://www.linkedin.com/oauth/v2/authorization?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${this.stateKey}&scope=${scopes.join('+')}`,
       popupConfig.title || 'Login with linkedin',
