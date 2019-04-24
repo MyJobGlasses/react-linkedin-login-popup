@@ -97,7 +97,7 @@ class LinkedinLoginButton extends React.PureComponent {
       redirectUrl,
       preventFromOpeningPopup,
       popupConfig,
-      scopes = ['r_liteprofile', 'r_emailaddress'],
+      scopes,
     } = this.props
     if (typeof preventFromOpeningPopup === 'function' && preventFromOpeningPopup()) {
       return
@@ -158,6 +158,7 @@ LinkedinLoginButton.defaultProps = {
     height: 600,
     title: 'Login with linkedin',
   },
+  scopes: ['r_liteprofile', 'r_emailaddress'],
 }
 
 export default LinkedinLoginButton
