@@ -97,6 +97,7 @@ class LinkedinLoginButton extends React.PureComponent {
       redirectUrl,
       preventFromOpeningPopup,
       popupConfig,
+      scopes = ['r_liteprofile', 'r_emailaddress'],
     } = this.props
     if (typeof preventFromOpeningPopup === 'function' && preventFromOpeningPopup()) {
       return
@@ -105,7 +106,7 @@ class LinkedinLoginButton extends React.PureComponent {
       throw new Error('You must provide a client ID and a redirectUrl !')
     }
     this.popup = window.open(
-      `https://www.linkedin.com/oauth/v2/authorization?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${this.stateKey}`,
+      `https://www.linkedin.com/oauth/v2/authorization?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${this.stateKey}&scope=${scopes.join('+')}`,
       popupConfig.title || 'Login with linkedin',
       `height=${popupConfig.height || 600},width=${popupConfig.width || 500}`,
     )
@@ -148,6 +149,7 @@ LinkedinLoginButton.propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
   }),
+  scopes: PropTypes.arrayOf(PropTypes.string),
 }
 
 LinkedinLoginButton.defaultProps = {
